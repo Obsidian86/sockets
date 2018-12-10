@@ -25,25 +25,24 @@ socket.on('NEW_MESSAGE', (message) => {
     let messageData = JSON.parse(message);
     let newMessage = `
     <li>
-        <img class="profileImage" src="${messageData.profileImage}">
+        <img class="profileImage" src="${messageData.profileImage}" onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';">
         <p class="messageText">
             <span class="user">${messageData.user}: </span>
             ${messageData.message}
         </p>
     </li>`;
     messages.insertAdjacentHTML('beforeend', newMessage);
-});
+}); 
 
 socket.on('POPULATE_USERS', (userInfo) => {
-    userInfo = JSON.parse(userInfo);
-        console.log(userInfo)
+    userInfo = JSON.parse(userInfo); 
     userInfo.forEach(user => {
         let newUser = `
         <li class="chatUser" id="${user.id}">
-            <img class="profileImage" src="${user.profileImage}">
+            <img class="profileImage" src="${user.profileImage}" onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';">
             <p class="userName">${user.user}</p>
         </li>`;
-        userList.insertAdjacentHTML('beforeend', newUser);
+        userList.insertAdjacentHTML('beforeend', newUser); 
     }); 
 });
 
@@ -51,7 +50,8 @@ socket.on('NEW_USER', (userInfo) => {
     userInfo = JSON.parse(userInfo);
     let newUser = `
     <li class="chatUser" id="${userInfo.id}">
-        <img class="profileImage" src="${userInfo.profileImage}">
+        <img class="profileImage" 
+            src="${userInfo.profileImage}" onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';" >
         <p class="userName">${userInfo.user}</p>
     </li>`;
     userList.insertAdjacentHTML('beforeend', newUser);
