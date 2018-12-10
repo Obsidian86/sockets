@@ -4,13 +4,15 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 
 const port = process.env.PORT || 3000;
-
+ 
 app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });
  
+let users = [];
+
 io.on("connection", (socket) => {   
     //AUTO FILL DATA
     let Start_Message;
@@ -46,15 +48,21 @@ io.on("connection", (socket) => {
     //AUTO FILL DATA
 
     socket.on("NEW_USER", (userInfo) => {
-        io.emit('NEW_USER', userInfo);
+        userInfo = JSON.parse(userInfo);
+        userInfo.id = socket.id;
+        io.to(`${socket.id}`).emit('POPULATE_USERS', JSON.stringify(users));
+        io.emit('NEW_USER', JSON.stringify(userInfo));
+        users.push(userInfo);
     });
 
     socket.on('NEW_MESSAGE', (message) => {  
         io.emit('NEW_MESSAGE', message);
     });
- 
+    
     socket.on("disconnect", () =>{
-        console.log("disconnected");
+        io.emit('REMOVE_USER', socket.id);
+        users = users.filter(user => user.id !== socket.id);
+        console.log(users);
     });
 
 

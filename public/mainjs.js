@@ -34,14 +34,36 @@ socket.on('NEW_MESSAGE', (message) => {
     messages.insertAdjacentHTML('beforeend', newMessage);
 });
 
+socket.on('POPULATE_USERS', (userInfo) => {
+    userInfo = JSON.parse(userInfo);
+        console.log(userInfo)
+    userInfo.forEach(user => {
+        let newUser = `
+        <li class="chatUser" id="${user.id}">
+            <img class="profileImage" src="${user.profileImage}">
+            <p class="userName">${user.user}</p>
+        </li>`;
+        userList.insertAdjacentHTML('beforeend', newUser);
+    }); 
+});
+
 socket.on('NEW_USER', (userInfo) => {
     userInfo = JSON.parse(userInfo);
     let newUser = `
-    <li>
+    <li class="chatUser" id="${userInfo.id}">
         <img class="profileImage" src="${userInfo.profileImage}">
         <p class="userName">${userInfo.user}</p>
     </li>`;
     userList.insertAdjacentHTML('beforeend', newUser);
+});
+
+socket.on('REMOVE_USER', (userInfo) => { 
+    let getUsers = document.getElementsByClassName("chatUser");
+    for(let i=0; i<getUsers.length; i++){
+        if(getUsers[i].id === userInfo){
+            getUsers[i].parentNode.removeChild(getUsers[i]);
+        }
+    }
 });
  
 
