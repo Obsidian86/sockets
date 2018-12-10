@@ -1,0 +1,174 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+}
+body { 
+    font: 13px Helvetica, Arial; 
+    background-color: rgb(84, 4, 121); 
+    padding-bottom: 39px; 
+}
+h1{
+    margin: 12px;
+    color: white; 
+    text-shadow: 0 0 3px rgb(58, 0, 50);
+}
+h3{ 
+    color: black;
+    margin: 12px;
+    text-align: center;
+}
+#mainBody{ 
+    display: flex; 
+}
+#userIndex{
+    width: 26%;
+    margin: 0 2%;
+} 
+#userIndex h3{
+    color: rgb(240, 240, 240);
+}
+#userList{ margin-top: 8px; }
+#userIndex li{
+    display: flex;
+    list-style-type: none;
+    color: white;
+    padding: 8px;
+    border-bottom: 1px solid rgb(148, 12, 160);
+}
+#userIndex p{ 
+    padding: 9px; 
+    color: rgb(209, 149, 216);
+    font-weight: bold;
+}
+#userIndex .profileImage{
+    height: 30px; 
+    width: 30px; 
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+#messageForm { 
+    background: rgb(99, 99, 99); 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+    display: flex;
+    box-shadow: 0 0 6px rgb(52, 3, 85);
+}
+#messageForm input { 
+    border: 0; 
+    padding: 12px 10px; 
+    width: 85%; 
+}
+#messageForm button, #loginContainer button { 
+    width: 15%; 
+    color: rgb(230, 116, 253);
+    background: rgb(84, 4, 121); 
+    border: none; 
+    padding: 10px; 
+    font-weight: bold;  
+}
+#messageForm button:hover, #loginContainer button:hover { 
+    background: purple;
+    cursor: pointer;
+}
+#messages { 
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+    background-color: rgb(185, 185, 185);
+    width: 70%; 
+}
+#messages li { 
+    padding: 10px;
+    display: flex; 
+    background-color: white; 
+}
+#messages li:nth-child(odd) { 
+    background-color: rgb(224, 220, 220); 
+}
+#messages .profileImage{ 
+    max-width: 50px;
+    max-height: 50px; 
+    border-radius: 50%;
+}
+#messages .messageText{
+    background-color: white;
+    box-shadow: 0 0 3px gray; 
+    width: 90%;
+    margin-left: 5px; 
+    padding: 10px; 
+    border-radius: 10px;
+    color: rgb(71, 71, 71);
+}
+#messages .user{
+    font-weight: bold; 
+    color: black;
+}
+#chatContainer{
+    display: none;
+}
+#loginContainer{
+    width: 60%;
+    max-width: 800px;
+    min-width: 300px;
+    margin: 0 auto;
+    background-color: white; 
+    padding: 10px;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 3px rgb(30, 0, 58);
+}
+#loginContainer form{
+    display: flex;
+    flex-direction: column; 
+    align-self: center; 
+ }
+#loginContainer input{
+    padding: 12px;
+    width: 77.8%;
+    padding-left: 20%;
+    margin-top: 20px; 
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 3px gray; 
+}
+label{ 
+    width: 15%; 
+    position: relative;
+    bottom: -47px;
+    left: 10px;
+    z-index: 1;
+    font-weight: bold;
+    border-right: 1px solid gray;
+    color: gray;
+}
+#loginContainer button{
+    padding: 10px; 
+    margin: 25px auto 20px auto;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    text-shadow: 0 0 3px rgb(53, 0, 78);
+}
+
+@media (max-width: 973px){
+    #messages{
+        width: 100%;
+    }
+    #userIndex{
+        display: none;
+    }
+    label{
+        width: 99%;
+        bottom: 0;
+        margin-top: 25px;
+        border: none;
+    }
+    #loginContainer input{ 
+        margin-top: 8px;
+        padding: 12px;
+        width: 93%;
+    }
+} 

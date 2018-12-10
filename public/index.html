@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>testChat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/styles.css"></link>
+  </head>
+  <body>
+    
+    <h1>ChatBox</h1>
+    <div id="loginContainer">
+      <h3>Log in to join chat</h3>
+      <div id="login-box">
+          <form action="">
+            <label for="display_name">Display name</label>
+            <input type="text" name="display_name" id="display_name" />
+            <label for="profile_image">Profile Image</label>
+            <input type="text" name="profile_image" id="profile_image" />
+            <button id="loginButton">Join chat</button>
+          </form>
+      </div> 
+    </div>
+    <div id="chatContainer"> 
+      <div id="mainBody">
+        <ul id="messages"></ul>
+        <div id="userIndex">
+          <h3>Users</h2>
+          <ul id="userList"> 
+          </ul>
+        </div>
+      </div>
+
+      <form action="" id="messageForm">
+        <input id="messageBox" autocomplete="off" placeholder="Type message" />
+        <button id="submitButton">SEND</button>
+      </form> 
+    </div>
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="/mainjs.js"></script>
+  </body>
+</html>
