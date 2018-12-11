@@ -12,63 +12,55 @@ app.get("/", (req, res) => {
 });
  
 let users = [];
+let messages = [];
 
-io.on("connection", (socket) => {   
-    //AUTO FILL DATA
+(function AUTOFILL(){
     let Start_Message;
-    for(let i=0; i<3; i++){
-        Start_Message = JSON.stringify({
+    for(let i=0; i<10; i++){
+        Start_Message = {
             "message": "This is a test first messsage",
             "user": "Johnathan Test",
             "profileImage": "https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg"
-        });
-        
-        io.emit("NEW_MESSAGE", Start_Message);
-    
-        Start_Message = JSON.stringify({
+        }; 
+        messages.push(Start_Message);
+        Start_Message = {
             "message": "This is a test second messsage, its a bit longer than the first",
             "user": "Test Peerson",
             "profileImage": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-        });
-        
-        io.emit("NEW_MESSAGE", Start_Message);
-    }
-     
-    Start_Message = JSON.stringify({ 
+        };
+        messages.push(Start_Message);
+    };
+    Start_Message = { 
         "user": "Johnathan Test",
         "profileImage": "https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg"
-    });
-    io.emit('NEW_USER', Start_Message);
-    Start_Message = JSON.stringify({ 
+    }; 
+    users.push(Start_Message);
+    Start_Message = { 
         "user": "Test Peerson",
         "profileImage": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
-    });
-    io.emit('NEW_USER', Start_Message);
+    }; 
+    users.push(Start_Message);
+})(); 
  
-    //AUTO FILL DATA
-
+io.on("connection", (socket) => {     
     socket.on("NEW_USER", (userInfo) => {
-        userInfo = JSON.parse(userInfo);
-        userInfo.id = socket.id;
-        io.to(`${socket.id}`).emit('POPULATE_USERS', JSON.stringify(users));
-        io.emit('NEW_USER', JSON.stringify(userInfo));
-        users.push(userInfo);
+        let newUserInfo = JSON.parse(userInfo);
+        newUserInfo.id = socket.id;
+        io.to(`${socket.id}`).emit('POPULATE_DATA', JSON.stringify({ userInfo: newUserInfo, users, messages}));
+        io.emit('NEW_USER', JSON.stringify(newUserInfo));
+        users.push(newUserInfo);
     });
 
-    socket.on('NEW_MESSAGE', (message) => {  
+    socket.on('NEW_MESSAGE', (message) => {
+        messages.push( JSON.parse(message) );
         io.emit('NEW_MESSAGE', message);
     });
     
     socket.on("disconnect", () =>{
         io.emit('REMOVE_USER', socket.id);
-        users = users.filter(user => user.id !== socket.id);
-        console.log(users);
-    });
-
-
+        users = users.filter(user => user.id !== socket.id); 
+    }); 
 });
 
-http.listen(port, ()=>{
-    console.log("connected");
-});
+http.listen(port, ()=>{ console.log("connected"); });
 

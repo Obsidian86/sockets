@@ -1,88 +1,95 @@
 const socket = io();
-
-const messages = document.getElementById("messages");
-const submit = document.getElementById("submitButton");
-const loginButton = document.getElementById("loginButton");
-const messageBox = document.getElementById("messageBox");
-const userList = document.getElementById("userList");
-
+ 
 class User {
-    setInfo(name, profileImage){
+    setInfo(userId, name, profileImage){
+        this.userId = userId;
         this.name = name;
         this.profileImage = profileImage;
     }
-    joinChat(){
+    joinChat(name, profileImage){
         socket.emit('NEW_USER', JSON.stringify({
-            "user": this.name,
-            "profileImage": this.profileImage
+            "user": name,
+            "profileImage": profileImage
         }));
     }
 }
+let user = new User();
 
+const dom = {
+    selId(elementId){ return(document.getElementById(elementId))  },
+    messages: document.getElementById("messages"),
+    submit: document.getElementById("submitButton"),
+    loginButton: document.getElementById("loginButton"),
+    messageBox: document.getElementById("messageBox"),
+    userList: document.getElementById("userList")
+}
+const template = {
+    message(messageData){
+        return(`
+            <li>
+                <img class="profileImage" 
+                    src="${messageData.profileImage}" 
+                    onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';">
+                <p class="messageText">
+                    <span class="user">${messageData.user}: </span>
+                    ${messageData.message}
+                </p>
+            </li>`);
+    },
+    user(userData){ 
+        return(`
+        <li class="chatUser ${ userData.id === user.userId && "thisUser" }" id="${userData.id}">
+            <img class="profileImage" src="${userData.profileImage}" onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';">
+            <p class="userName">${userData.user}</p>
+        </li>`);
+    }
+}
 
 //SOCKET IO LISTENERS //SOCKET IO LISTENERS //SOCKET IO LISTENERS
-socket.on('NEW_MESSAGE', (message) => {
-    let messageData = JSON.parse(message);
-    let newMessage = `
-    <li>
-        <img class="profileImage" src="${messageData.profileImage}" onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';">
-        <p class="messageText">
-            <span class="user">${messageData.user}: </span>
-            ${messageData.message}
-        </p>
-    </li>`;
-    messages.insertAdjacentHTML('beforeend', newMessage);
+socket.on('NEW_MESSAGE', (message) => { console.log('new message');
+    let newMessage = template.message(JSON.parse(message));
+    dom.messages.insertAdjacentHTML('beforeend', newMessage); 
+    dom.messages.scrollTop = messages.scrollHeight;
 }); 
 
-socket.on('POPULATE_USERS', (userInfo) => {
-    userInfo = JSON.parse(userInfo); 
-    userInfo.forEach(user => {
-        let newUser = `
-        <li class="chatUser" id="${user.id}">
-            <img class="profileImage" src="${user.profileImage}" onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';">
-            <p class="userName">${user.user}</p>
-        </li>`;
-        userList.insertAdjacentHTML('beforeend', newUser); 
-    }); 
+socket.on('POPULATE_DATA', (popInfo) => { 
+    popInfo = JSON.parse(popInfo);
+    user.setInfo(popInfo.userInfo.id, popInfo.userInfo.user, popInfo.userInfo.profileImage);
+    popInfo.messages.forEach(message =>{    
+        dom.messages.insertAdjacentHTML('beforeend', template.message(message)); 
+    });
+    popInfo.users.forEach(user => {
+        dom.userList.insertAdjacentHTML('beforeend', template.user(user)); 
+    });
+    dom.selId("loginContainer").style.display = "none";
+    dom.selId("chatContainer").style.display = "block";
+    dom.messages.scrollTop = dom.messages.scrollHeight; 
 });
 
-socket.on('NEW_USER', (userInfo) => {
-    userInfo = JSON.parse(userInfo);
-    let newUser = `
-    <li class="chatUser" id="${userInfo.id}">
-        <img class="profileImage" 
-            src="${userInfo.profileImage}" onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';" >
-        <p class="userName">${userInfo.user}</p>
-    </li>`;
-    userList.insertAdjacentHTML('beforeend', newUser);
+socket.on('NEW_USER', (userInfo) => {console.log('new user'); 
+    dom.userList.insertAdjacentHTML('beforeend', template.user(JSON.parse(userInfo)));
 });
 
-socket.on('REMOVE_USER', (userInfo) => { 
+socket.on('REMOVE_USER', (userInfo) => { console.log('remove user');
     let getUsers = document.getElementsByClassName("chatUser");
     for(let i=0; i<getUsers.length; i++){
         if(getUsers[i].id === userInfo){
             getUsers[i].parentNode.removeChild(getUsers[i]);
+            break;
         }
     }
 });
  
-
-let user = new User();
- 
-
 //PAGE EVENT LISTENERS //PAGE EVENT LISTENERS //PAGE EVENT LISTENERS
-loginButton.addEventListener("click", (event)=>{
+dom.loginButton.addEventListener("click", (event)=>{
     event.preventDefault();
-    user.setInfo(
-        document.getElementById("display_name").value !== "" ? document.getElementById("display_name").value : "Anonymous",
-        document.getElementById("profile_image").value !== "" ? document.getElementById("profile_image").value : "https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png"
-    ); 
-    user.joinChat();
-    document.getElementById("loginContainer").style.display = "none";
-    document.getElementById("chatContainer").style.display = "block";
+    user.joinChat(
+        dom.selId("display_name").value !== "" ? dom.selId("display_name").value : "Anonymous",
+        dom.selId("profile_image").value !== "" ? dom.selId("profile_image").value : "https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png"
+    );
 });
 
-submit.addEventListener("click", (event)=>{
+dom.submit.addEventListener("click", (event)=>{
     event.preventDefault();
     if(messageBox.value.length > 0){
         let sendMessage = {
@@ -91,7 +98,7 @@ submit.addEventListener("click", (event)=>{
             profileImage: user.profileImage
         }
         socket.emit('NEW_MESSAGE', JSON.stringify(sendMessage));
-        messageBox.value = "";
-    } 
+        dom.messageBox.value = "";
+    };
 }); 
 
