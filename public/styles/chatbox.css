@@ -1,0 +1,170 @@
+#mainBody{ 
+    display: flex;  
+} 
+
+header{
+    display: flex;
+    justify-content: space-between;
+}
+header h1{
+    width: 30%; 
+}
+header nav{
+    width: 70%;
+    display: flex;
+    justify-content: flex-end; 
+}
+header nav button{
+    margin-right: 20px;
+    height: 50%;
+    align-self: center;
+    padding: 5px; 
+    border: 1px solid rgb(161, 16, 161);
+    border-radius: 5px;
+    color: rgb(189, 26, 189);
+    font-weight: bold;
+    background: none;
+    cursor: pointer;
+}
+header nav button:hover{
+    background-color: rgba(225, 225, 225, .5);
+}
+
+#userIndex{
+    width: 26%;
+    margin: 0 2%;
+    position: sticky;
+    height: auto; 
+} 
+#userIndex h3{
+    color: rgb(240, 240, 240);
+}
+#userList{ 
+    margin-top: 8px; 
+}
+#userIndex li{
+    display: flex;
+    list-style-type: none;
+    color: white;
+    padding: 5px;  
+    border-radius: 5px;
+    position: relative;
+} 
+#userIndex li:hover{
+    background-color: rgb(59, 0, 94);
+    cursor: pointer;
+}
+#userIndex p{ 
+    padding: 9px; 
+    color: rgb(228, 185, 233);
+    font-weight: bold;
+    text-shadow: .5px .5px 1px rgb(31, 0, 51);
+}
+#userIndex li:hover p{
+    padding-left: 15px;
+}
+#userIndex .profileImage{
+    height: 30px; 
+    width: 30px; 
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+#userIndex .thisUser p{ 
+    color: rgb(131, 17, 141);
+}
+#userIndex #userList .thisUser{
+    background-color: rgb(46, 0, 58);
+}
+.chatUser div{
+    background-color: rgb(233, 233, 233);
+    position: absolute;
+    right: 0; 
+    bottom: -60px;
+    width: 100%; 
+    z-index: 2; 
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgb(58, 0, 58); 
+}
+.chatUser div h4{ 
+    color: rgb(92, 0, 92); 
+    font-weight: bold;
+    margin: 14px auto 5px auto;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+}
+.chatUser div input, .chatUser div #sendDirect_btn{
+    width: 85%; 
+    margin: 5px 5%;
+    padding: 8px 5px;
+    border-radius: 3px; 
+    border: none;
+    box-shadow: 0 0 3px rgb(126, 126, 126);
+} 
+.chatUser div #sendDirect_btn{
+    width: 89%;
+    color: rgb(230, 116, 253);
+    margin-bottom: 5px; 
+    font-weight: bold;
+    background-color: rgb(84, 4, 121);
+    cursor: pointer;
+}
+.chatUser div #sendDirect_btn:hover{ 
+    background-color: purple; 
+}
+
+
+
+
+
+
+
+
+
+#messageForm { 
+    background: rgb(99, 99, 99); 
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+    display: flex;
+    box-shadow: 0 0 6px rgb(52, 3, 85);
+}
+#messageForm input { 
+    border: 0; 
+    padding: 12px 10px; 
+    width: 85%; 
+} 
+#messages { 
+    list-style-type: none; 
+    margin: 0;
+    margin-left: 11px;   
+    padding: 0; 
+    background-color: rgb(185, 185, 185);
+    width: 70%;
+    height: 86vh;
+    overflow-y: scroll;
+    box-shadow: 0 0 4px rgb(35, 0, 46);
+}
+#messages li { 
+    padding: 10px;
+    display: flex; 
+    background-color: white;  
+    border-bottom: 1px solid rgb(235, 235, 235);
+    border-left: 6px solid rgb(226, 226, 226);
+} 
+#messages li:nth-child(odd){
+    border-left: 6px solid rgb(199, 199, 199);
+}
+#messages .messageText{
+    background-color: white; 
+    width: 90%;
+    margin-left: 5px; 
+    padding: 10px; 
+    border-radius: 10px;
+    color: rgb(107, 107, 107);
+}
+#messages .user{
+    font-weight: bold; 
+    color: black;
+} 

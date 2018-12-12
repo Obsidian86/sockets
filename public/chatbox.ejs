@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ChatBox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"></link>
+    <link rel="stylesheet" type="text/css" href="styles/chatbox.css"></link>
+    <link rel="stylesheet" type="text/css" href="styles/media.css"></link>
+  </head>
+  <body>
+    <p class="hidden" id="h_user"><%= userInfo.display_name %></p>
+    <p class="hidden" id="h_profileImage"><%= userInfo.profile_image %></p>
+    <header>
+        <h1>ChatBox</h1>
+        <nav>
+          <button>alerts</button>
+          <button>user list</button>
+          <button>disconnect</button>
+        </nav>
+    </header>
+    <div id="chatContainer"> 
+      <div id="mainBody">
+        <ul id="messages"></ul>
+        <div id="userIndex">
+          <h3>Users</h2>
+          <ul id="userList"> 
+          </ul>
+        </div>
+      </div> 
+      <form action="" id="messageForm">
+        <input id="messageBox" autocomplete="off" placeholder="Type message" />
+        <button id="submitButton">SEND</button>
+      </form> 
+    </div>
+    <script src="scripts/user.js"></script>
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="scripts/htmltemplates.js"></script>
+    <script src="scripts/mainjs.js"></script>
+  </body>
+</html>

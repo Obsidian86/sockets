@@ -1,0 +1,69 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+}
+body { 
+    font: 13px Helvetica, Arial; 
+    background-color: rgb(84, 4, 121);
+    background-image: url("../images/ui/purple_bg.gif"); 
+    padding-bottom: 39px; 
+}
+.hidden{ 
+    display: none; 
+    height: 0; 
+    width: 0; 
+    overflow: hidden; 
+    position: absolute; 
+    top: -1000px; 
+}
+h1{
+    margin: 12px;
+    color: white; 
+    text-shadow: 0 0 3px rgb(58, 0, 50);
+}
+h3{ 
+    color: rgb(83, 83, 83);
+    margin: 12px;
+    text-align: center;
+}
+input[type=text]{
+    font-weight: bold; 
+    color: rgb(68, 68, 68);
+}
+.profileImage{ 
+    width: 50px;
+    height: 50px; 
+    border-radius: 50%;
+} 
+
+.close_btn{
+    background-color: rgb(122, 0, 41);
+    color: white;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    width: 18px;
+    height: 18px;
+    padding-left: 1px;
+    padding-bottom: 1px;
+    border: none;
+    border-radius: 50%;
+}
+.close_btn:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: rgb(53, 0, 54);
+}
+
+#messageForm button, #loginContainer button { 
+    width: 15%; 
+    color: rgb(230, 116, 253);
+    background: rgb(84, 4, 121); 
+    border: none; 
+    padding: 10px; 
+    font-weight: bold;  
+}
+#messageForm button:hover, #loginContainer button:hover { 
+    background: purple;
+    cursor: pointer;
+}
