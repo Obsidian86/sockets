@@ -1,11 +1,4 @@
 @media (max-width: 973px){
-    #messages{
-        width: 100%;
-        margin-left: 0;
-    }
-    #userIndex{
-        display: none;
-    }
     label{
         width: 99%;
         bottom: 0;
@@ -17,4 +10,4 @@
         padding: 12px;
         width: 93%;
     }
-} 
+}  

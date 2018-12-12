@@ -2,12 +2,18 @@ const template = {
 
     message(messageData){
         return(`
-            <li>
+            <li ${messageData["direct"] ? "class='direct'" : ""}>
                 <img class="profileImage" 
                     src="${messageData.profileImage}" 
                     onerror="this.src='https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png';">
                 <p class="messageText">
-                    <span class="user">${messageData.user}: </span>
+                    <span class="user"> 
+                        ${ messageData["direct"] === "from" ? "from " : ""}
+                        ${messageData.user} 
+                        ${ messageData["direct"] === "sent" ? "to " : ""} 
+                        ${ messageData["directTo"] ?  messageData["directTo"] : ""}
+                    : </span>
+                    
                     ${messageData.message}
                 </p>
             </li>`);
@@ -21,11 +27,11 @@ const template = {
         </li>`);
     },
 
-    directText(toUser){
+    directText(toUser, toDisplay){
         return(`
-            <div id="directMessageBox">
+            <div id="directMessageBox" class="directBox">
                 <button class="close_btn" onClick={cancelDirect(event)}>x</button>
-                <h4>Direct Text</h4>
+                <h4>To: ${toDisplay}</h4>
                 <input type='text' id='directText'>
                 <button id="sendDirect_btn" onClick={submitDirect("${toUser}")}>SEND</button>
             </div>

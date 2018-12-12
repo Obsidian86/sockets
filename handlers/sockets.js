@@ -32,8 +32,7 @@ let messages = [];
 })(); 
  
 module.exports = (io) => {
-    io.on("connection", (socket) => { 
-        console.log("SOCKET CONNECTION");
+    io.on("connection", (socket) => {  
         
         socket.on("NEW_USER", (userInfo) => {
             let newUserInfo = JSON.parse(userInfo);
@@ -52,8 +51,12 @@ module.exports = (io) => {
 
         socket.on('DIRECT_MESSAGE', (message) => {
             let newMessage = JSON.parse(message);
-            newMessage.message = sanitize(newMessage.message);
-            io.to(`${newMessage.toUser}`).emit('RECEIVE_DIRECT', JSON.stringify(newMessage));
+            let findTo = users.filter(user => user.id === newMessage.toUser);
+            let sendMessage = { ...newMessage.fromUser, user: newMessage.fromUser.name, message: sanitize(newMessage.message), direct: "from"};
+            io.to(`${newMessage.toUser}`).emit('RECEIVE_DIRECT', JSON.stringify(sendMessage));
+            sendMessage.direct = "sent";
+            sendMessage.directTo = findTo.length > 0 ? findTo[0].user : "Disconnected user";
+            io.to(`${sendMessage.userId}`).emit('SENT_DIRECT', JSON.stringify(sendMessage));
         });
         
         socket.on("disconnect", () =>{

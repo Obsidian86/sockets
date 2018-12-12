@@ -8,6 +8,12 @@ body {
     background-image: url("../images/ui/purple_bg.gif"); 
     padding-bottom: 39px; 
 }
+a{
+    text-decoration: none;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
 .hidden{ 
     display: none; 
     height: 0; 

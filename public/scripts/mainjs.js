@@ -1,11 +1,12 @@
 const socket = io();
- 
+
 const dom = {
     selId(elementId){ return(document.getElementById(elementId))  },
     messages: document.getElementById("messages"),
     submit: document.getElementById("submitButton"),
     messageBox: document.getElementById("messageBox"),
-    userList: document.getElementById("userList")
+    userList: document.getElementById("userList"),
+    toggleUsers: document.getElementById("toggleUsers_btn")
 } 
 const initialEmit = () =>{
     let userInfo = {
@@ -15,50 +16,7 @@ const initialEmit = () =>{
     socket.emit('NEW_USER', JSON.stringify(userInfo));
 }
 initialEmit();
-
-//SOCKET IO LISTENERS //SOCKET IO LISTENERS //SOCKET IO LISTENERS
-socket.on('RECEIVE_DIRECT', (message) => { console.log(message);
-    message = JSON.parse(message);
-    let nMessage = message.fromUser;
-    nMessage.message = message.message;
-    
-    let newMessage = template.message(JSON.parse(nMessage));  
-    dom.messages.insertAdjacentHTML('beforeend', newMessage); 
-    dom.messages.scrollTop = messages.scrollHeight;
-}); 
-socket.on('NEW_MESSAGE', (message) => { 
-    let newMessage = template.message(JSON.parse(message));
-    dom.messages.insertAdjacentHTML('beforeend', newMessage); 
-    dom.messages.scrollTop = messages.scrollHeight;
-}); 
-
-socket.on('POPULATE_DATA', (popInfo) => { 
-    popInfo = JSON.parse(popInfo);
-    user.setInfo(popInfo.userInfo.id, popInfo.userInfo.user, popInfo.userInfo.profileImage);
-    popInfo.messages.forEach(message =>{    
-        dom.messages.insertAdjacentHTML('beforeend', template.message(message)); 
-    });
-    popInfo.users.forEach(user => {
-        dom.userList.insertAdjacentHTML('beforeend', template.user(user)); 
-    });  
-    dom.messages.scrollTop = dom.messages.scrollHeight; 
-});
-
-socket.on('NEW_USER', (userInfo) => {  
-    dom.userList.insertAdjacentHTML('beforeend', template.user(JSON.parse(userInfo)));
-});
-
-socket.on('REMOVE_USER', (userInfo) => { 
-    let getUsers = document.getElementsByClassName("chatUser");
-    for(let i=0; i<getUsers.length; i++){
-        if(getUsers[i].id === userInfo){
-            getUsers[i].parentNode.removeChild(getUsers[i]);
-            break;
-        }
-    }
-});
  
-//PAGE EVENT LISTENERS //PAGE EVENT LISTENERS //PAGE EVENT LISTENERS
  
 dom.submit.addEventListener("click", (event)=>{
     event.preventDefault();
@@ -71,13 +29,15 @@ dom.submit.addEventListener("click", (event)=>{
         socket.emit('NEW_MESSAGE', JSON.stringify(sendMessage));
         dom.messageBox.value = "";
     };
-}); 
-
-//
-
+});  
+ 
 const sendDirect = (user) =>{
+    if(document.getElementsByClassName("directBox").length > 0){
+        dom.selId("directMessageBox").outerHTML = "";
+    }
     let userBox = dom.selId(user);
-    userBox.insertAdjacentHTML('beforeend', template.directText(user));
+    let toDisplay = userBox.children[1].innerText;
+    userBox.insertAdjacentHTML('beforeend', template.directText(user, toDisplay));
 }
 const cancelDirect = (event) =>{
     let thisBox = event.target.parentNode;
@@ -92,3 +52,50 @@ const submitDirect = (sendUser) =>{
     socket.emit('DIRECT_MESSAGE', JSON.stringify(sendMessage));
     dom.selId("directMessageBox").parentNode.removeChild(dom.selId("directMessageBox"));
 }
+
+//VISUAL
+let userList_state = {
+    view: true,
+    smallList: false,
+    viewLock: true
+} 
+dom.toggleUsers.addEventListener("click", () =>{
+    userList_state.view = !userList_state.view;
+    setView();
+});
+
+const setView = () =>{
+    let winHeight = window.innerHeight;
+    let winWidth = window.innerWidth;
+    if(winWidth < 651){
+        userList_state.smallList = true; 
+        dom.selId("userIndex").classList.add("smallList");
+        if(userList_state.viewLock){ 
+            userList_state.view = false; 
+            userList_state.viewLock = false; 
+        }
+    } else{
+        if(document.getElementsByClassName("smallList").length > 0){
+            document.getElementsByClassName("smallList")[0].classList.remove("smallList");
+        }
+        if(!userList_state.viewLock){ 
+            userList_state.view = true; 
+            userList_state.viewLock = true; 
+        }
+        userList_state.smallList = false;
+    }
+    dom.selId("userIndex").style.display = userList_state.view ? "block" : "none";
+    dom.messages.style.height = (winHeight - 94) + "px";
+
+    if( userList_state.smallList || !userList_state.view  ){
+        dom.messages.style.width = "96%";
+        dom.messages.style.margin = "0 2% 0 2%";
+    }else{
+        dom.messages.style.width = "70%" ;
+        dom.messages.style.margin = "0 0 0 11px" ;
+    } 
+    dom.messages.scrollTop = dom.messages.scrollHeight; 
+}
+
+window.addEventListener("resize", setView);
+setView();

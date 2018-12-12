@@ -14,9 +14,8 @@ header nav{
     display: flex;
     justify-content: flex-end; 
 }
-header nav button{
-    margin-right: 20px;
-    height: 50%;
+header nav button, header nav a{
+    margin-right: 20px; 
     align-self: center;
     padding: 5px; 
     border: 1px solid rgb(161, 16, 161);
@@ -26,21 +25,28 @@ header nav button{
     background: none;
     cursor: pointer;
 }
-header nav button:hover{
+header nav button:hover, header nav a:hover{
     background-color: rgba(225, 225, 225, .5);
-}
-
+} 
 #userIndex{
     width: 26%;
     margin: 0 2%;
     position: sticky;
     height: auto; 
 } 
+#userIndex.smallList{
+    position: absolute;
+    background-color: rgb(101, 0, 110);
+    width: 100%;
+    margin: 0; 
+    padding-bottom: 8px;
+}
 #userIndex h3{
     color: rgb(240, 240, 240);
 }
 #userList{ 
     margin-top: 8px; 
+    display: block;
 }
 #userIndex li{
     display: flex;
@@ -54,7 +60,8 @@ header nav button:hover{
     background-color: rgb(59, 0, 94);
     cursor: pointer;
 }
-#userIndex p{ 
+#userIndex p{  
+    width: 100%;
     padding: 9px; 
     color: rgb(228, 185, 233);
     font-weight: bold;
@@ -112,16 +119,7 @@ header nav button:hover{
 }
 .chatUser div #sendDirect_btn:hover{ 
     background-color: purple; 
-}
-
-
-
-
-
-
-
-
-
+} 
 #messageForm { 
     background: rgb(99, 99, 99); 
     position: fixed; 
@@ -167,4 +165,11 @@ header nav button:hover{
 #messages .user{
     font-weight: bold; 
     color: black;
+}  
+#messages li.direct .user{ 
+    color: blue;
+} 
+#messages li.direct { 
+    font-style: italic;
+    border-left: 6px solid blue;
 } 

@@ -12,15 +12,14 @@
     <p class="hidden" id="h_profileImage"><%= userInfo.profile_image %></p>
     <header>
         <h1>ChatBox</h1>
-        <nav>
-          <button>alerts</button>
-          <button>user list</button>
-          <button>disconnect</button>
+        <nav> 
+          <button id="toggleUsers_btn">user list</button>
+          <a href="http://localhost:3000">disconnect</a>
         </nav>
     </header>
     <div id="chatContainer"> 
-      <div id="mainBody">
-        <ul id="messages"></ul>
+      <div id="mainBody">  
+            <ul id="messages"></ul> 
         <div id="userIndex">
           <h3>Users</h2>
           <ul id="userList"> 
@@ -36,5 +35,6 @@
     <script src="/socket.io/socket.io.js"></script> 
     <script src="scripts/htmltemplates.js"></script>
     <script src="scripts/mainjs.js"></script>
+    <script src="scripts/socketListeners.js"></script>
   </body>
 </html>
