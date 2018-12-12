@@ -36,8 +36,9 @@ const sendDirect = (user) =>{
         dom.selId("directMessageBox").outerHTML = "";
     }
     let userBox = dom.selId(user);
+    let toImage = userBox.children[0].outerHTML; 
     let toDisplay = userBox.children[1].innerText;
-    userBox.insertAdjacentHTML('beforeend', template.directText(user, toDisplay));
+    userBox.insertAdjacentHTML('beforeend', template.directText(user, toDisplay, toImage));
 }
 const cancelDirect = (event) =>{
     let thisBox = event.target.parentNode;

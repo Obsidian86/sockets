@@ -1,7 +1,6 @@
 #mainBody{ 
     display: flex;  
-} 
-
+}  
 header{
     display: flex;
     justify-content: space-between;
@@ -42,7 +41,12 @@ header nav button:hover, header nav a:hover{
     padding-bottom: 8px;
 }
 #userIndex h3{
-    color: rgb(240, 240, 240);
+    color: rgb(228, 185, 233);
+    background-color: rgb(46, 0, 58);
+    padding: 4px; 
+    border-radius: 9px;
+    width: 80%;
+    margin: 8px auto 18px auto;
 }
 #userList{ 
     margin-top: 8px; 
@@ -84,14 +88,17 @@ header nav button:hover, header nav a:hover{
     background-color: rgb(46, 0, 58);
 }
 .chatUser div{
-    background-color: rgb(233, 233, 233);
+    background-color: rgb(243, 243, 243);
+    border: 1px solid white;
     position: absolute;
-    right: 0; 
-    bottom: -60px;
-    width: 100%; 
+    right: 0;  
+    margin: 0 .5%;
+    width: 99%; 
+    top: 0;
     z-index: 2; 
     border-radius: 5px;
     box-shadow: 0 0 3px rgb(58, 0, 58); 
+    padding-bottom: 5px;
 }
 .chatUser div h4{ 
     color: rgb(92, 0, 92); 
@@ -109,6 +116,14 @@ header nav button:hover, header nav a:hover{
     border: none;
     box-shadow: 0 0 3px rgb(126, 126, 126);
 } 
+#userList .chatUser div .profileImage{
+    position: absolute;
+    top: -13px;
+    left: 12px;
+    height: 40px;
+    width: 40px;
+    box-shadow: 0 0 3px black;
+}
 .chatUser div #sendDirect_btn{
     width: 89%;
     color: rgb(230, 116, 253);

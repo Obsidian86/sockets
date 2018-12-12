@@ -21,12 +21,14 @@ let messages = [];
     };
     Start_Message = { 
         "user": "Johnathan Test",
-        "profileImage": "https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg"
+        "profileImage": "https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg",
+        "id": "asd"
     }; 
     users.push(Start_Message);
     Start_Message = { 
         "user": "Test Peerson",
-        "profileImage": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
+        "profileImage": "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg",
+        "id": "zxc"
     }; 
     users.push(Start_Message);
 })(); 

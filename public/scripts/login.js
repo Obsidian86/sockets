@@ -1,5 +1,5 @@
 const testImage = document.getElementById("testImage");
-const defaultImage = "https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png";
+const defaultImage = "images/profiles/default.png";
 
 document.getElementById("profile_image").addEventListener("blur", () =>{
     let tryImage = document.getElementById("profile_image").value;
