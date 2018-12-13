@@ -47,7 +47,7 @@ input[type=text]{
     background-color: rgb(122, 0, 41);
     color: white;
     position: absolute;
-    left: 76%;
+    right: 10px;
     top: 8px;
     width: 18px;
     height: 18px;
@@ -60,17 +60,34 @@ input[type=text]{
     cursor: pointer;
     color: rgb(255, 255, 255);
     background-color: rgb(53, 0, 54);
-}
-
-#messageForm button, #loginContainer button { 
-    width: 15%; 
+}  
+.btn{
     color: rgb(230, 116, 253);
     background: rgb(84, 4, 121); 
     border: none; 
     padding: 10px; 
-    font-weight: bold;  
+    font-weight: bold; 
 }
-#messageForm button:hover, #loginContainer button:hover { 
-    background: purple;
-    cursor: pointer;
+.btn_purple{
+    color: rgb(230, 116, 253);
+    background: rgb(84, 4, 121); 
+}
+.btn_purple:hover{ 
+    background-color: purple; 
+}
+.btn_blue{
+    background-color: blue; 
+    color: lightblue;
+}
+.btn_blue:hover{
+    background-color: darkblue; 
+    color: lightblue;
+}
+.btn_red{
+    background-color: rgb(189, 51, 80); 
+    color: rgb(250, 221, 226);
+}
+.btn_red:hover{
+    background-color: darkred; 
+    color: pink;
 }

@@ -26,10 +26,6 @@ const template = {
             <p class="userName" onClick={sendDirect("${userData.id}")}>${userData.user}</p>
         </li>`);
     },
-    group(groupPeople){
-
-    },
-
     directText(toUser, toDisplay, toImage){
         return(`
             <div id="directMessageBox" class="directBox">
@@ -38,7 +34,9 @@ const template = {
                     <button class="close_btn" onClick={cancelDirect(event)}>x</button>
                     <h4>${toDisplay}</h4>
                     <input type='text' id='directText'>
-                    <button id="sendDirect_btn" onClick={submitDirect("${toUser}")}>SEND</button>
+                    <div class="buttonGroup">
+                        <button id="sendDirect_btn" class="btn btn_purple" onClick={submitDirect("${toUser}")}>Send</button>
+                    </div>
                 </div>
             </div>
         `);

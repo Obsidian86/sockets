@@ -12,9 +12,10 @@
     <p class="hidden" id="h_profileImage"><%= userInfo.profile_image %></p>
     <header>
         <h1>ChatBox</h1>
-        <nav> 
-          <button id="toggleUsers_btn">user list</button>
-          <a href="http://localhost:3000">disconnect</a>
+        <nav>
+          <p class="welcome">Welcome, <%= userInfo.display_name %> </p>
+          <button id="toggleUsers_btn" class="btn btn_purple">Toggle user list</button>
+          <a href="http://localhost:3000" class="btn btn_red">Disconnect</a>
         </nav>
     </header>
     <div id="chatContainer"> 
@@ -30,7 +31,7 @@
       </div> 
       <form action="" id="messageForm">
         <input id="messageBox" autocomplete="off" placeholder="Type message" />
-        <button id="submitButton">SEND</button>
+        <button id="submitButton" class="btn btn_purple">SEND</button>
       </form> 
     </div>
     <script src="scripts/user.js"></script>

@@ -5,9 +5,7 @@ header{
     display: flex;
     justify-content: space-between;
 }
-header h1{
-    width: 30%; 
-}
+header h1{ width: 30%; }
 header nav{
     width: 70%;
     display: flex;
@@ -16,17 +14,18 @@ header nav{
 header nav button, header nav a{
     margin-right: 20px; 
     align-self: center;
-    padding: 5px; 
-    border: 1px solid rgb(161, 16, 161);
-    border-radius: 5px;
-    color: rgb(189, 26, 189);
-    font-weight: bold;
-    background: none;
+    padding: 2px;  
+    border-radius: 3px; 
     cursor: pointer;
+    box-shadow: 0 0 3px rgb(44, 0, 65);
 }
-header nav button:hover, header nav a:hover{
-    background-color: rgba(225, 225, 225, .5);
-} 
+header nav p { 
+    color: white;
+    font-weight: bold;
+    align-self: center; 
+    margin-right: 20px;
+    text-align: center;
+}
 #userIndex{
     width: 26%;
     margin: 0 2%;
@@ -36,8 +35,9 @@ header nav button:hover, header nav a:hover{
 #listContainer{  
     overflow: hidden;
     overflow-y: scroll;
-    width: 120%;
-    height: 70%; 
+    width: 100%;
+    height: 70%;
+    padding-right: 30px; 
     padding-bottom: 150px;
 }
 #userIndex.smallList{
@@ -58,12 +58,14 @@ header nav button:hover, header nav a:hover{
 #userList{ 
     margin-top: 8px; 
     display: block;
+    padding-top: 7px; 
 }
 #userIndex li{
     display: flex;
     list-style-type: none;
     color: white;
-    padding: 5px;   
+    padding: 5px;
+    margin-bottom: 10px;    
     position: relative;
 } 
 #userIndex li:hover{
@@ -72,6 +74,7 @@ header nav button:hover, header nav a:hover{
 }
 #userIndex p{  
     width: 100%;
+    overflow: hidden;
     padding: 9px; 
     color: rgb(228, 185, 233);
     font-weight: bold;
@@ -79,11 +82,6 @@ header nav button:hover, header nav a:hover{
 }
 #userIndex li:hover p{
     padding-left: 15px;
-}
-#userIndex .group{
-    background-color:  rgb(46, 0, 58);
-    margin-top: 10px; 
-    padding: 3px;
 }
 #userIndex .profileImage{
     height: 30px; 
@@ -111,7 +109,7 @@ header nav button:hover, header nav a:hover{
     padding-bottom: 5px;
 }
 .chatUser #directMessageBox div{ 
-    width: 83%;
+    width: 100%;
 }
 .chatUser #directMessageBox h4{ 
     color: rgb(92, 0, 92); 
@@ -121,13 +119,23 @@ header nav button:hover, header nav a:hover{
     text-align: center;
     font-size: 1.2em;
 }
-.chatUser div input, .chatUser div #sendDirect_btn{
-    width: 85%; 
+.buttonGroup{
+    display: flex; 
+    width: 100%; 
+}
+.chatUser div input, #sendDirect_btn, #invite_btn{
+    width: 87%; 
     margin: 5px 5%;
-    padding: 8px 5px;
+    padding: 8px 1.5%;
     border-radius: 3px; 
     border: none;
     box-shadow: 0 0 3px rgb(126, 126, 126);
+}  
+.chatUser div #sendDirect_btn, #invite_btn{
+    width: 90%; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
+    cursor: pointer;
 } 
 #directMessageBox .profileImage{
     position: absolute;
@@ -136,17 +144,6 @@ header nav button:hover, header nav a:hover{
     height: 40px;
     width: 40px;
     box-shadow: 0 0 3px black; 
-}
-.chatUser div #sendDirect_btn{
-    width: 89%;
-    color: rgb(230, 116, 253);
-    margin-bottom: 5px; 
-    font-weight: bold;
-    background-color: rgb(84, 4, 121);
-    cursor: pointer;
-}
-.chatUser div #sendDirect_btn:hover{ 
-    background-color: purple; 
 } 
 #messageForm { 
     background: rgb(99, 99, 99); 
@@ -159,7 +156,10 @@ header nav button:hover, header nav a:hover{
 #messageForm input { 
     border: 0; 
     padding: 12px 10px; 
-    width: 85%; 
+    width: 85%;
+} 
+#messageForm button { 
+    width: 15%;
 } 
 #messages { 
     list-style-type: none; 
