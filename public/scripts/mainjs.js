@@ -41,7 +41,7 @@ const sendDirect = (user) =>{
     userBox.insertAdjacentHTML('beforeend', template.directText(user, toDisplay, toImage));
 }
 const cancelDirect = (event) =>{
-    let thisBox = event.target.parentNode;
+    let thisBox = event.target.parentNode.parentNode;
     thisBox.parentNode.removeChild(thisBox); 
 }
 const submitDirect = (sendUser) =>{  
@@ -87,8 +87,8 @@ const setView = () =>{
     }
     dom.selId("userIndex").style.display = userList_state.view ? "block" : "none";
     dom.messages.style.height = (winHeight - 94) + "px";
-
-    if( userList_state.smallList || !userList_state.view  ){
+    dom.selId("userIndex").style.height = (winHeight - 94) + "px";
+    if( userList_state.smallList || !userList_state.view  ){ 
         dom.messages.style.width = "96%";
         dom.messages.style.margin = "0 2% 0 2%";
     }else{

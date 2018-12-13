@@ -21,21 +21,27 @@ const template = {
 
     user(userData){ 
         return(`
-        <li class="chatUser ${ userData.id === user.userId && "thisUser" }" id="${userData.id}" >
+        <li class="chatUser ${ userData.id === user.userId ? "thisUser" : ""}" id="${userData.id}" >
             <img class="profileImage" src="${userData.profileImage}" onerror="this.src='images/profiles/default.png';">
             <p class="userName" onClick={sendDirect("${userData.id}")}>${userData.user}</p>
         </li>`);
     },
+    group(groupPeople){
 
-    directText(toUser, toDisplay, toImage){ console.log(toImage)
+    },
+
+    directText(toUser, toDisplay, toImage){
         return(`
             <div id="directMessageBox" class="directBox">
-                ${toImage}
-                <button class="close_btn" onClick={cancelDirect(event)}>x</button>
-                <h4>${toDisplay}</h4>
-                <input type='text' id='directText'>
-                <button id="sendDirect_btn" onClick={submitDirect("${toUser}")}>SEND</button>
+                <div>
+                    ${toImage}
+                    <button class="close_btn" onClick={cancelDirect(event)}>x</button>
+                    <h4>${toDisplay}</h4>
+                    <input type='text' id='directText'>
+                    <button id="sendDirect_btn" onClick={submitDirect("${toUser}")}>SEND</button>
+                </div>
             </div>
         `);
     }
+
 }

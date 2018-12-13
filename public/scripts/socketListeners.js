@@ -1,3 +1,4 @@
+
 socket.on('RECEIVE_DIRECT', (message) => {
     let newMessage = template.message(JSON.parse(message));  
     dom.messages.insertAdjacentHTML('beforeend', newMessage); 
@@ -20,9 +21,30 @@ socket.on('POPULATE_DATA', (popInfo) => {
     popInfo.messages.forEach(message =>{    
         dom.messages.insertAdjacentHTML('beforeend', template.message(message)); 
     });
+    
+    let groups = {};
     popInfo.users.forEach(user => {
-        dom.userList.insertAdjacentHTML('beforeend', template.user(user)); 
-    });  
+        if(!user.group){
+            dom.userList.insertAdjacentHTML('beforeend', template.user(user)); 
+        }else{
+            if(!groups[user.group]){
+                groups[user.group] = [user];
+            }else{
+                groups[user.group].push(user);
+            }
+        }
+    });
+
+    for(group in groups){
+        let assembleGroup = `<ul class="group ${group}" id="group${group}"><p>${group} group</p>`;
+        groups[group].forEach(user =>{
+            assembleGroup += template.user(user);
+        });
+        assembleGroup += `</ul>`;
+        dom.selId("listContainer").insertAdjacentHTML('beforeend', assembleGroup);
+        dom.selId(`group${group}`).style.borderLeft = `4px solid ${group}`;
+    }
+    
     dom.messages.scrollTop = dom.messages.scrollHeight; 
 });
 

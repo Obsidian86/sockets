@@ -1,5 +1,5 @@
 #mainBody{ 
-    display: flex;  
+    display: flex; 
 }  
 header{
     display: flex;
@@ -30,15 +30,22 @@ header nav button:hover, header nav a:hover{
 #userIndex{
     width: 26%;
     margin: 0 2%;
-    position: sticky;
-    height: auto; 
+    padding-right: 10px; 
+    overflow: hidden;
 } 
+#listContainer{  
+    overflow: hidden;
+    overflow-y: scroll;
+    width: 120%;
+    height: 70%; 
+    padding-bottom: 150px;
+}
 #userIndex.smallList{
     position: absolute;
     background-color: rgb(101, 0, 110);
-    width: 100%;
+    width: 104%;
     margin: 0; 
-    padding-bottom: 8px;
+    padding-bottom: 150px;
 }
 #userIndex h3{
     color: rgb(228, 185, 233);
@@ -56,8 +63,7 @@ header nav button:hover, header nav a:hover{
     display: flex;
     list-style-type: none;
     color: white;
-    padding: 5px;  
-    border-radius: 5px;
+    padding: 5px;   
     position: relative;
 } 
 #userIndex li:hover{
@@ -74,6 +80,11 @@ header nav button:hover, header nav a:hover{
 #userIndex li:hover p{
     padding-left: 15px;
 }
+#userIndex .group{
+    background-color:  rgb(46, 0, 58);
+    margin-top: 10px; 
+    padding: 3px;
+}
 #userIndex .profileImage{
     height: 30px; 
     width: 30px; 
@@ -87,20 +98,22 @@ header nav button:hover, header nav a:hover{
 #userIndex #userList .thisUser{
     background-color: rgb(46, 0, 58);
 }
-.chatUser div{
+.chatUser #directMessageBox{
     background-color: rgb(243, 243, 243);
     border: 1px solid white;
     position: absolute;
-    right: 0;  
-    margin: 0 .5%;
-    width: 99%; 
+    right: 0;   
+    width: 100%;
+    left: 0; 
     top: 0;
-    z-index: 2; 
-    border-radius: 5px;
+    z-index: 2;  
     box-shadow: 0 0 3px rgb(58, 0, 58); 
     padding-bottom: 5px;
 }
-.chatUser div h4{ 
+.chatUser #directMessageBox div{ 
+    width: 83%;
+}
+.chatUser #directMessageBox h4{ 
     color: rgb(92, 0, 92); 
     font-weight: bold;
     margin: 14px auto 5px auto;
@@ -116,13 +129,13 @@ header nav button:hover, header nav a:hover{
     border: none;
     box-shadow: 0 0 3px rgb(126, 126, 126);
 } 
-#userList .chatUser div .profileImage{
+#directMessageBox .profileImage{
     position: absolute;
     top: -13px;
     left: 12px;
     height: 40px;
     width: 40px;
-    box-shadow: 0 0 3px black;
+    box-shadow: 0 0 3px black; 
 }
 .chatUser div #sendDirect_btn{
     width: 89%;
