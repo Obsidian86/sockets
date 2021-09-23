@@ -3,9 +3,9 @@
   <head>
     <title>ChatBox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css"></link>
-    <link rel="stylesheet" type="text/css" href="/styles/chatbox.css"></link>
-    <link rel="stylesheet" type="text/css" href="/styles/media.css"></link>
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css"></link>
+    <link rel="stylesheet" type="text/css" href="./styles/chatbox.css"></link>
+    <link rel="stylesheet" type="text/css" href="./styles/media.css"></link>
   </head>
   <body>
     <p class="hidden" id="h_user"><%= userInfo.display_name %></p>
@@ -15,7 +15,7 @@
         <nav>
           <p class="welcome">Welcome, <%= userInfo.display_name %> </p>
           <button id="toggleUsers_btn" class="btn btn_purple">Toggle user list</button>
-          <a href="/" class="btn btn_red">Disconnect</a>
+          <a href="/chatbox/" class="btn btn_red">Disconnect</a>
         </nav>
     </header>
     <div id="chatContainer"> 
@@ -34,10 +34,10 @@
         <button id="submitButton" class="btn btn_purple">SEND</button>
       </form> 
     </div>
-    <script src="/scripts/user.js"></script>
+    <script src="./scripts/user.js"></script>
     <script src="/socket.io/socket.io.js"></script> 
-    <script src="/scripts/htmltemplates.js"></script>
-    <script src="/scripts/mainjs.js"></script>
-    <script src="/scripts/socketListeners.js"></script>
+    <script src="./scripts/htmltemplates.js"></script>
+    <script src="./scripts/mainjs.js"></script>
+    <script src="./scripts/socketListeners.js"></script>
   </body>
 </html>

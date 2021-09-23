@@ -14,16 +14,15 @@ const port = process.env.PORT;
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use('/chatbox', express.static('public'));
+app.use('/chatbox/', express.static(__dirname + '/public'));
 
 app.get("/chatbox/", (req, res) => {
-    console.log(__dirname)
-    res.render("/public/index");
+    res.render(__dirname + "/public/index");
 });
 
 app.post("/chatbox/", (req, res) => {
     req.body.display_name = sanitize(req.body.display_name);
-    res.render("/public", {userInfo: req.body});
+    res.render(__dirname + "/public/chatbox", {userInfo: req.body});
 });
 
 http.listen(port, ()=>{
