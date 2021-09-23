@@ -16,11 +16,11 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
-app.get("/", (req, res) => {
+app.get("/cahtbox/", (req, res) => {
     res.render(__dirname + "/public/index");
 });
 
-app.post("/", (req, res) => {
+app.post("/chatbox/", (req, res) => {
     req.body.display_name = sanitize(req.body.display_name);
     res.render(__dirname + "/public/chatbox", {userInfo: req.body});
 });
