@@ -14,7 +14,7 @@ const port = process.env.PORT;
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/chatbox/public'));
+app.use('/chatbox', express.static('public'));
 
 app.get("/chatbox/", (req, res) => {
     res.render(__dirname + "/public/index");
