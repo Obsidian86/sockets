@@ -1,4 +1,5 @@
 const sanitize = (toSanitize) => {  
+    console.log(toSanitize)
     let newString = "";
     for(let i=0; i < toSanitize.length; i++){
         let sanObject = {
