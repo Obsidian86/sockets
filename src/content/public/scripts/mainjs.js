@@ -1,4 +1,4 @@
-const socket = io('https://06designs.com/chatbox/');
+const socket = io('https://06designs.com', { path: '/chatbox/' });
 
 const dom = {
     selId(elementId){ return(document.getElementById(elementId))  },
