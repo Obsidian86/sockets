@@ -9,7 +9,7 @@ const sanitize = require("./helpers/sanitize");
 
 require('./handlers/sockets')(io);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
  
 app.set("view engine", "ejs");
 
@@ -25,5 +25,5 @@ app.post("/", (req, res) => {
     res.render(__dirname + "/public/chatbox", {userInfo: req.body});
 });
 
-http.listen(port, ()=>{ console.log("connected"); });
+http.listen(port, ()=>{ console.log("connected " + port); });
 

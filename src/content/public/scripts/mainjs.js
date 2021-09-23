@@ -31,14 +31,17 @@ dom.submit.addEventListener("click", (event)=>{
     };
 });  
  
-const sendDirect = (user) =>{
-    if(document.getElementsByClassName("directBox").length > 0){
-        dom.selId("directMessageBox").outerHTML = "";
+const sendDirect = (clickedUser) =>{
+    console.log(clickedUser, user)
+    if (clickedUser && user && user.userId !== clickedUser) {
+        if(document.getElementsByClassName("directBox").length > 0){
+            dom.selId("directMessageBox").outerHTML = "";
+        }
+        let userBox = dom.selId(clickedUser);
+        let toImage = userBox.children[0].outerHTML; 
+        let toDisplay = userBox.children[1].innerText;
+        userBox.insertAdjacentHTML('beforeend', template.directText(clickedUser, toDisplay, toImage));
     }
-    let userBox = dom.selId(user);
-    let toImage = userBox.children[0].outerHTML; 
-    let toDisplay = userBox.children[1].innerText;
-    userBox.insertAdjacentHTML('beforeend', template.directText(user, toDisplay, toImage));
 }
 const cancelDirect = (event) =>{
     let thisBox = event.target.parentNode.parentNode;

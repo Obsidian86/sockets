@@ -1,0 +1,12 @@
+version: '3'
+services:
+    node:
+        build: ./src
+        ports:
+            - 3232:3232
+        environment:
+            - PORT=3232
+        volumes:
+            - ./src/content:/code/src
+        dns:
+            - 8.8.8.8
