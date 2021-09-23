@@ -21,7 +21,6 @@ app.get("/chatbox/", (req, res) => {
 });
 
 app.post("/chatbox/", (req, res) => {
-    console.log(req.body.display_name)
     req.body.display_name = sanitize(req.body.display_name);
     res.render(__dirname + "/public/chatbox", {userInfo: req.body});
 });

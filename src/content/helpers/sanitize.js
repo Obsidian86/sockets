@@ -1,6 +1,6 @@
-const sanitize = (toSanitize) => {  
-    console.log(toSanitize)
+const sanitize = (toSanitize) => {
     let newString = "";
+    if (!toSanitize || !toSanitize.length) return newString
     for(let i=0; i < toSanitize.length; i++){
         let sanObject = {
             "<" : "&lt;",
