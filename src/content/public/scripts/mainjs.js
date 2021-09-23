@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io.connect('https://06designs.com/chatbox/');
 
 const dom = {
     selId(elementId){ return(document.getElementById(elementId))  },
@@ -32,7 +32,6 @@ dom.submit.addEventListener("click", (event)=>{
 });  
  
 const sendDirect = (clickedUser) =>{
-    console.log(clickedUser, user)
     if (clickedUser && user && user.userId !== clickedUser) {
         if(document.getElementsByClassName("directBox").length > 0){
             dom.selId("directMessageBox").outerHTML = "";
