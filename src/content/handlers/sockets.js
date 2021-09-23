@@ -14,6 +14,7 @@ module.exports = (io) => {
     io.on("connection", (socket) => {  
         
         socket.on("NEW_USER", (userInfo) => {
+            console.log(newUserInfo)
             let newUserInfo = JSON.parse(userInfo);
             newUserInfo.id = socket.id;
             io.to(`${socket.id}`).emit('POPULATE_DATA', JSON.stringify({ userInfo: newUserInfo, users, messages}));
