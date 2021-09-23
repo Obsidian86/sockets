@@ -16,7 +16,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
-app.get("/cahtbox/", (req, res) => {
+app.get("/chatbox/", (req, res) => {
     res.render(__dirname + "/public/index");
 });
 
